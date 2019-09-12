@@ -262,7 +262,52 @@ Route::prefix('ware')->middleware('ware')->group(function () {
 	Route::post('ware/login_do','WareController@login_do');
 //微信
 // Route::get('wechat','WechatController@wechat');
-// Route::get('access_token','WechatController@access_token');
+Route::get('access_token','WechatController@access_token');
 // Route::get('openid','WechatController@openid');
 //网页授权
 // Route::get('wechat/login','Wechat_loginController@login');//微信登录
+	/**
+	 * 文件上传
+	 */
+Route::get('upload','WechatController@upload');
+Route::post('do_upload','WechatController@do_upload');
+Route::get('source','WechatController@wechat_source');
+
+
+/**
+ * //post
+ */
+
+Route::get('guzzle_upload','WechatController@guzzle_upload');
+Route::post('curl_post','WechatController@curl_post');
+//清除api
+Route::get('clear','WechatController@clear');
+//获取资源
+Route::get('material/{id}','WechatController@material');
+/**
+ * 用户标签
+ */
+///用户标签
+Route::get('user','Wechat_userController@user');
+Route::post('user_do','Wechat_userController@user_do');
+//列表展示
+Route::get('user_list','Wechat_userController@user_list');
+//修改
+Route::get('update/{id}/{name}','Wechat_userController@update');
+Route::post('update_do/{id}','Wechat_userController@update_do');
+//删除
+Route::get('delete/{id}','Wechat_userController@delete');
+//粉丝
+Route::get('Fans/{id}/{name}','Wechat_userController@fans');
+//打标签
+Route::get('user_openid/{id}','Wechat_userController@user_openid');
+Route::post('user_openid_do/{id}','Wechat_userController@user_openid_do');
+//推送消息
+Route::get('push/{id}','Wechat_userController@push');
+Route::post('push_do/{id}','Wechat_userController@push_do');
+///用户下的标签
+Route::get('user_label/{v}','Wechat_userController@user_label');
+//发送模板消息
+Route::get('template','Wechat_userController@template');
+
+
