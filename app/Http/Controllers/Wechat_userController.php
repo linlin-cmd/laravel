@@ -118,12 +118,13 @@ class Wechat_userController extends Controller
     		'touser'=>$openid,
     		'template_id'=>$template_id,
     		'url'=>"http://w3.shop.com",
-    		[
-    			'data'=>[
-					'first'=>['value'=>'恭喜你收到!'],
-					['']
-    			]
-    		]
+    		'data'=>[
+				'first'=>['value'=>'恭喜你收到!'],
+				'keyword1'=>['value'=>'球球'],
+				'keyword2'=>['value'=>'qq']
+			]
     	];
+    	$res =$this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+    	dd($res);
     }
 }
