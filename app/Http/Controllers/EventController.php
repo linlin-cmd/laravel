@@ -19,7 +19,6 @@ class EventController extends Controller
     	
     	$xml_obj = simplexml_load_string($xml_string,'SimpleXMLElement',LIBXML_NOCDATA);
     	$xml_arr = (array)$xml_obj;
-    	dd($xml_arr);
         \Log::Info(json_encode($xml_arr,JSON_UNESCAPED_UNICODE));
         /**
          * 业务逻辑
