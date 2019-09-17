@@ -19,6 +19,30 @@ class EventController extends Controller
     	
     	$xml_obj = simplexml_load_string($xml_string,'SimpleXMLElement',LIBXML_NOCDATA);
     	$xml_arr = (array)$xml_obj;
+    	dd($xml_arr);
         \Log::Info(json_encode($xml_arr,JSON_UNESCAPED_UNICODE));
+        /**
+         * 业务逻辑
+         */
+        if($xml_arr['MsgType'] == 'event'){
+            if($xml_arr['Event'] == 'subscribe'){
+                $share_code = explode('_',$xml_arr['EventKey'])[1];
+                $user_openid = $xml_arr['FromUserName']; //粉丝openid
+                //判断openid是否已经在日志表
+                $wechat_openid = DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
+                if(empty($wechat_openid)){
+                    DB::table('qrcode')->where(['id'=>$share_code])->increment('share_num',1);
+                    DB::table('wechat_log')->insert([
+                        'openid'=>$user_openid,
+                        'add_time'=>time()
+                    ]);
+                }
+            }
+        }
+
+
+        $message = '欢迎关注！';
+        $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA'.$message.']]></Content></xml>';
+        echo $xml_str;
     }
 }
