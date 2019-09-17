@@ -207,6 +207,25 @@ Route::prefix('kkk')->group(function () {
 	//执行修改
 	Route::post('update_do/{id}','KkkController@update_do');
 });
+/**
+ * 9.16周考		->middleware('grant')	中间件
+ */
+Route::prefix('grant')->group(function () {
+	
+	//微信授权
+	Route::get('grant','GrantController@grant');
+	Route::get('code','GrantController@code');
+	Route::get('massage/{v}','GrantController@massage');
+	Route::get('qrcode/{id}','GrantController@qrcode');
+	Route::get('list','GrantController@list');
+});
+//登录
+Route::get('grant/login','GrantController@login');
+Route::post('grant/login_do','GrantController@login_do');
+
+
+
+
 
 //新闻
 Route::prefix('news')->middleware('checklogin')->group(function () {
