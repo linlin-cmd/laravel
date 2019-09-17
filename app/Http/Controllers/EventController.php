@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class EventController extends Controller
 {
     public function event(){
@@ -28,7 +28,7 @@ class EventController extends Controller
                 $share_code = explode('_',$xml_arr['EventKey'])[1];
                 $user_openid = $xml_arr['FromUserName']; //粉丝openid
                 //判断openid是否已经在日志表
-                $wechat_openid = DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
+                $wechat_openid =DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
                 if(empty($wechat_openid)){
                     DB::table('qrcode')->where(['id'=>$share_code])->increment('share_num',1);
                     DB::table('wechat_log')->insert([
@@ -41,7 +41,7 @@ class EventController extends Controller
 
 
         $message = '欢迎关注！';
-        $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA'.$message.']]></Content></xml>';
+        $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
         echo $xml_str;
     }
 }
