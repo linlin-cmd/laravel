@@ -121,5 +121,24 @@ class Tools {
         $data =['appid'=>$appid];
         $dd =$this->curl_post($url,json_encode($data));
     }
+    /**
+     * jssdk
+     */
+    public function jssdk(){
+        $jssdk ="jssdk";
+        //判断是否有值
+        if ($this->redis->exists($jssdk)) {
+            //redis取值
+            return $this->redis->get($jssdk);
+        }else{
+            //用file_get_contents
+            $res =file_get_contents("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$this->access_token()."&type=jsapi");
+            $res =json_decode($res,1);
+            //存在redis
+            $this->redis->set($jssdk,$res['ticket'],$res['expires_in']);
+            return $res['ticket'];
+        }
+        
+    }
 }
  ?>

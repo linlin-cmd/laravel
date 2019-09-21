@@ -184,6 +184,9 @@ Route::prefix('/')->group(function () {
 //前台登录
 Route::get('login','index\LoginController@index');
 Route::post('login_do','index\LoginController@login_do');
+/**
+ * 网页授权
+ */
 //网页授权
 Route::get('wechat','index\LoginController@wechat');//微信登录
 Route::get('code','index\LoginController@code');//微信code
@@ -208,7 +211,7 @@ Route::prefix('kkk')->group(function () {
 	Route::post('update_do/{id}','KkkController@update_do');
 });
 /**
- * 9.16周考		->middleware('grant')	中间件
+ * 9.16周考		->middleware('grant')	中间件中有二维码自定义菜单
  */
 Route::prefix('grant')->group(function () {
 	
@@ -216,8 +219,21 @@ Route::prefix('grant')->group(function () {
 	Route::get('grant','GrantController@grant');
 	Route::get('code','GrantController@code');
 	Route::get('massage/{v}','GrantController@massage');
+	///二维码
 	Route::get('qrcode/{id}','GrantController@qrcode');
 	Route::get('list','GrantController@list');
+	//自定义菜单
+	Route::get('menu','GrantController@menu');
+	//表单添加自定义菜单
+	Route::get('menu_add','GrantController@menu_add');
+	Route::get('menu_menu','GrantController@menu_menu');
+	Route::post('menu_do','GrantController@menu_do');
+	Route::get('menu_del/{id}','GrantController@menu_del');
+
+	/**
+	 * jssdk
+	 */
+	Route::get('jssdk','GrantController@jssdk');
 });
 //登录
 Route::get('grant/login','GrantController@login');
@@ -328,5 +344,15 @@ Route::post('push_do/{id}','Wechat_userController@push_do');
 Route::get('user_label/{v}','Wechat_userController@user_label');
 //发送模板消息
 Route::get('template','Wechat_userController@template');
-
+//crontab
+Route::prefix('crontab')->group(function () {
+	//网页授权
+	Route::get('login','CrontabController@login');
+	//获取code码
+	Route::get('code','CrontabController@code');
+	//添加
+	Route::get('index','CrontabController@index');
+	//展示
+	Route::get('list','CrontabController@list');
+});
 

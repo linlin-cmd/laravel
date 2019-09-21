@@ -71,4 +71,135 @@ class GrantController extends Controller
     	DB::table('qrcode')->where(['id'=>$id])->update(['url'=>'/storage'.$path]);
     	return redirect('grant/list');
     }
+    public function menu(){
+    	$url ="https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$this->tools->access_token();
+    	$data =[
+    		'button'=>[
+    			[
+    				'type'=>'click',
+    				'name'=>'我的猫呢',
+    				'key'=>'mao'
+    			],[
+    					'name'=>"菜单",
+    					'sub_button'=>[
+    					   [
+    					   "type"=>"view",
+			               "name"=>"搜索",
+			               "url"=>"http://www.soso.com/"
+			               ],
+			               [
+			               	 "type"=>"miniprogram",
+				             "name"=>"林林",
+				             "url"=>"http://mp.weixin.qq.com",
+				             "appid"=>"wxaf15615068649b19",
+				             "pagepath"=>"pages/lunar/index"
+			               ],
+			               [
+				               "type"=>"click",
+				               "name"=>"赞一下我们",
+				               "key"=>"GOOD"
+			               ]
+			      	]
+    			]
+    		]
+    	];
+    	$data =json_encode($data,JSON_UNESCAPED_UNICODE);
+    	$res =$this->tools->curl_post($url,$data);
+    	dd($res);
+    }
+    public function menu_add(){
+    	$info =DB::table('menu')->get();
+    	return view('grant.menu_add',['info'=>$info]);
+    }
+    public function menu_do(){
+    	$post =Request()->except('_token');
+    	//判断一级菜单二级菜单
+    	if ($post['name2']=="") {
+    		$post['button_type']=1;
+    	}else{
+    		$post['button_type']=2;
+    	}
+    	//添加入库
+    	DB::table('menu')->insert($post);
+    	$this->menu_menu();
+    	return redirect('grant/menu_add');
+
+    }
+    public function menu_menu(){
+    	/**
+    	 * 
+    	 */
+    	//查询数据库
+    	$res =DB::table('menu')->select(['name'])->groupBy('name')->get();//groupBy分组
+    	$data=[];
+    	foreach($res as $vv){
+            $menu_info = DB::table('menu')->where(['name'=>$vv->name])->get();
+            $menu_info =json_decode(json_encode($menu_info),1);
+            $arr = [];
+            foreach($menu_info as $v){
+                if($v['button_type'] == 1){ //普通一级菜单
+                    if($v['type'] == 1){ //click
+                        $arr = [
+                            'type'=>'click',
+                            'name'=>$v['name'],
+                            'key'=>$v['key_url']
+                        ];
+                    }elseif($v['type'] == 2){//view
+                        $arr = [
+                            'type'=>'view',
+                            'name'=>$v['name'],
+                            'url'=>$v['key_url']
+                        ];
+                    }
+                }elseif($v['button_type'] == 2){ //带有二级菜单的一级菜单
+                    $arr['name'] = $v['name'];
+                    if($v['type'] == 1){ //click
+                        $button_arr = [
+                            'type'=>'click',
+                            'name'=>$v['name2'],
+                            'key'=>$v['key_url']
+                        ];
+                    }elseif($v['type'] == 2){//view
+                        $button_arr = [
+                            'type'=>'view',
+                            'name'=>$v['name2'],
+                            'url'=>$v['key_url']
+                        ];
+                    }
+                    $arr['sub_button'][] = $button_arr;
+                }
+            }
+            $data['button'][] = $arr;
+        }
+    	// dd(json_encode($data,JSON_UNESCAPED_UNICODE));
+    	// dd($data);
+    	$url ="https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$this->tools->access_token();
+    	$res =$this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+    	return redirect('grant/menu_add');
+    	dd($res);
+    }
+    /**
+     * 删除
+     */
+    public function menu_del($id){
+    	$res =DB::table('menu')->where(['id'=>$id])->delete();
+    	$this->menu_menu();
+    	return redirect('grant/menu_add');
+    }
+
+    /**
+     * JSSDK
+     */
+    public function jssdk(){
+    	$url ='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    	//jssdk
+    	$jssdk =$this->tools->jssdk();
+    	$timestamp =time();
+    	$nonceStr =rand(1000,9999).'linlin';
+    	$sign_str = 'jsapi_ticket='.$jssdk.'&noncestr='.$nonceStr.'&timestamp='.$timestamp.'&url='.$url;
+    	//
+    	$signature=sha1($sign_str);
+    	// dd($jssdk);
+    	return view('grant.jssdk',compact('nonceStr','signature','timestamp'));
+    }
 }

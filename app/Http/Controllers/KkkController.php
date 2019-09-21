@@ -7,6 +7,10 @@ use App\model\Kkk;
 class KkkController extends Controller
 {
     public function add(){
+        //获取easywechat
+        $app = app('wechat.official_account');
+        // $app->user->list($nextOpenId = null);
+        // dd();
     	return view('kkk/add');
     }
     public function add_do(){

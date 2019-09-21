@@ -15,7 +15,7 @@ class EventController extends Controller
     	//创建日志
     	$append =file_put_contents($path,$xml_string,FILE_APPEND);
     	//追加内容
-    	file_put_contents($path,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n",FILE_APPEND);
+    	file_put_contents($path,"\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n",FILE_APPEND);
     	
     	$xml_obj = simplexml_load_string($xml_string,'SimpleXMLElement',LIBXML_NOCDATA);
     	$xml_arr = (array)$xml_obj;
