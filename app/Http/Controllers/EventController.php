@@ -67,14 +67,14 @@ class EventController extends Controller
 	        	];
 	        	DB::table('sign')->insert($data);
         	}else{
-        		
+
         	}
         	//判断是签到还是未签到
         	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
         	if ($sign->sign=="1") {
-        		$message ="签到成功";
-        	}else{
         		$message ="已签到";
+        	}else{
+        		$message ="签到成功";
         	}
         	
         }
