@@ -50,13 +50,20 @@ class EventController extends Controller
 			    ///新关注用户发送信息
 			    $message = '欢迎关注!,'.$kao_openid['nickname'];
 			    // dd($message);
-			    $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
-			    echo $xml_str;
             }
 
         }
         //签到
+        if ($xml_arr['EventKey']=="1") {
+        	$message ="签到成功";
+        }
 
+
+
+
+        //回复消息
+        $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
+		echo $xml_str;
 
     }
 }
