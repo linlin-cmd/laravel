@@ -65,11 +65,6 @@ class CrontabController extends Controller
     	return redirect('crontab/tag_list');
     }
     public function tag_list(){
-    	$data =[];
-        $url ="";
-        \Log::info('任务调动');
-        $this->tools->curl_post($url,$data);
-            die;
     	$url ="https://api.weixin.qq.com/cgi-bin/tags/get?access_token=".$this->tools->access_token();
     	$res =file_get_contents($url);
     	$res =json_decode($res,1);

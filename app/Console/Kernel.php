@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
             $tools=new Tools();
             $data =[];
             $url ="";
-            \Log::info('任务调动');
             $tools->curl_post($url,$data);
+            \Log::info('任务调动');
         })->cron('* * * * *');
     }
 
