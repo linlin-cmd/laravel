@@ -61,12 +61,13 @@ class EventController extends Controller
         	if (empty($res)) {
         		$data =[
 	        		'sign'=>'1',
-	        		'integral'=>'0',
-	        		'openid'=>$xml_arr['FromUserName'];
-	        		'continuity'=>1
+	        		'integral'=>'1',
+	        		'openid'=>$xml_arr['FromUserName'],
+	        		'continuity'=>5
 	        	];
 	        	DB::table('sign')->insert($data);
         	}else{
+        		
         	}
         	//判断是签到还是未签到
         	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
