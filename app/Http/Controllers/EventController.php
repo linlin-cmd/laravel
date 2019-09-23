@@ -61,9 +61,9 @@ class EventController extends Controller
         	if (empty($res)) {
         		$data =[
 	        		'sign'=>'1',
-	        		'integral'=>'1',
+	        		'integral'=>'5',
 	        		'openid'=>$xml_arr['FromUserName'],
-	        		'continuity'=>5
+	        		'continuity'=>1
 	        	];
 	        	DB::table('sign')->insert($data);
         	}else{
