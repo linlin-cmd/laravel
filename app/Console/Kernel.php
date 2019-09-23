@@ -28,7 +28,6 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function(){
-            //DB::table('kao')->insert(['kao_name'=>"林林鸭"]);
             $tools=new Tools();
             $data =[];
             $url ="";
