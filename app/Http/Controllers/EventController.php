@@ -79,11 +79,12 @@ class EventController extends Controller
         	
         }
 
-        
+
         //查询积分
         if ($xml_arr['EventKey']=="积分") {
         	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
-        	$message="积分为:".$sign->integral;
+        	$integral =$sign->integral??0;
+        	$message="积分为:".$integral;
         }
 
 
