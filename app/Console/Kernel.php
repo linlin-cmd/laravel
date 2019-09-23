@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use DB;
+use App\Tools\Tools;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -27,7 +28,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function(){
-            DB::table('kao')->insert(['kao_name'=>"林林鸭"]);
+            //DB::table('kao')->insert(['kao_name'=>"林林鸭"]);
+            $tools=new Tools();
+            $data =[];
+            $url ="";
+            \Log::info('任务调动');
+            $tools->curl_post($url,$data);
         })->cron('* * * * *');
     }
 

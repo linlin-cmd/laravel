@@ -354,5 +354,11 @@ Route::prefix('crontab')->group(function () {
 	Route::get('index','CrontabController@index');
 	//展示
 	Route::get('list','CrontabController@list');
+	//添加用户标签
+	Route::get('add','CrontabController@add');
+	Route::post('add_do','CrontabController@add_do');
+	Route::get('tag_list','CrontabController@tag_list');
+	Route::get('getidlist/{v}','CrontabController@getidlist');
+	Route::get('news/{v}','CrontabController@news');
 });
 

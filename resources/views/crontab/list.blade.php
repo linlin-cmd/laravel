@@ -15,7 +15,10 @@
 		<tr>
 			<td></td>
 			<td>{{$v}}</td>
-			<td></td>
+			<td>
+				<a href="{{url('crontab/getidlist/'.$v)}}">获取用户身上标签</a>
+				<a href="{{url('crontab/news/'.$v)}}">单发消息</a>
+			</td>
 		</tr>
 	@endforeach
 	</table>
