@@ -34,7 +34,7 @@ class LoginController extends Controller
         }
     }
     public function wechat(){
-        $redirect_url="http://w3.shop.com/code";
+        $redirect_url=env('APP_URL').'/code';
         $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaf15615068649b19&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         header('Location:'.$url);
     }

@@ -60,7 +60,7 @@ class EventController extends Controller
         	$res =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->count();
         	if (empty($res)) {
         		$data =[
-	        		'sign'=>'',
+	        		'sign'=>'0',
 	        		'integral'=>'5',
 	        		'openid'=>$xml_arr['FromUserName'],
 	        		'continuity'=>1
