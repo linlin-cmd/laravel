@@ -60,7 +60,7 @@ class EventController extends Controller
         	$res =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->count();
         	if (empty($res)) {
         		$data =[
-	        		'sign'=>'0',
+	        		'sign'=>'',
 	        		'integral'=>'5',
 	        		'openid'=>$xml_arr['FromUserName'],
 	        		'continuity'=>1
@@ -84,7 +84,8 @@ class EventController extends Controller
         //查询积分
         if ($xml_arr['EventKey']=="积分") {
         	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
-        	$integral =$sign->integral??0;
+        	//三元运算符
+        	$integral =empty($sign->integral) ? 0 : $sign->integral;
         	$message="积分为:".$integral;
         }
 

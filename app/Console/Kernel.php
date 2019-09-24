@@ -28,11 +28,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function(){
-            $tools=new Tools();
-            $data =[];
-            $url ="";
-            $tools->curl_post($url,$data);
-            \Log::info('任务调动');
+            // $tools=new Tools();
+            // $data =[];
+            // $url ="";
+            // $tools->curl_post($url,$data);
+            // \Log::info('任务调动');
         })->cron('* * * * *');
     }
 
