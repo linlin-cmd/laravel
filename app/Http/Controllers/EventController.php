@@ -33,7 +33,7 @@ class EventController extends Controller
         if($xml_arr['MsgType'] == 'event'){
             if($xml_arr['Event'] == 'subscribe'){
             	//二维码
-                $share_code = explode('_',$xml_arr['EventKey'])[1]??[];
+                $share_code = explode('_',$xml_arr['EventKey'])[1];
                 $user_openid = $xml_arr['FromUserName']; //粉丝openid
                 //判断openid是否已经在日志表
                 $wechat_openid =DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
@@ -56,6 +56,9 @@ class EventController extends Controller
         }
         //签到
         if ($xml_arr['EventKey']=="签到") {
+
+        	//查询数据库
+        	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
         	//判断是否有这个用户签到
         	$res =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->count();
         	if (empty($res)) {
@@ -66,16 +69,38 @@ class EventController extends Controller
 	        		'continuity'=>1
 	        	];
 	        	DB::table('sign')->insert($data);
-        	}else{
-
         	}
         	//判断是签到还是未签到
-        	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
         	if ($sign->sign=="1") {
         		$message ="已签到";
         	}else{
         		$message ="签到成功";
         		DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['sign'=>1]);
+        		//判断当前天数
+        		if ($sign->continuity=="1") {
+        			$integral =$sign->integral+5;
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        		}
+        		//第二天
+        		if ($sign->continuity=="2") {
+        			$integral =$sign->integral+10;
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        		}
+        		//第三天
+        		if ($sign->continuity=="3") {
+        			$integral =$sign->integral+15;
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        		}
+        		//第四天
+        		if ($sign->continuity=="4") {
+        			$integral =$sign->integral+20;
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        		}
+        		//第五天
+        		if ($sign->continuity=="5") {
+        			$integral =$sign->integral+25;
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        		}
         	}
         	
         }
