@@ -44,21 +44,22 @@ class EventController extends Controller
                         'add_time'=>time()
                     ]);
                 }
-
-			    //获取用户昵称
-			    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
-			    $kao_openid =json_decode($kao_openid,1);
 			    ///新关注用户发送信息
-			    $message = '欢迎关注!,'.$kao_openid['nickname'];
-			    // dd($message);
+			    $message = '欢迎关注!,';
             }
 
         }
+        //用户回复消息
+        if($xml_arr['Event'] == 'subscribe' && $xml_arr['MsgType'] == 'event') {
+        	$user_openid = $xml_arr['FromUserName']; //粉丝openid
+        	//获取用户信息
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =json_decode($kao_openid,1);
+		    ///新关注用户发送信息
+		    $message = '欢迎关注!,'.$kao_openid['nickname'];
+        }
         //签到
         if ($xml_arr['EventKey']=="签到") {
-
-        	//查询数据库
-        	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
         	//判断是否有这个用户签到
         	$res =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->count();
         	if (empty($res)) {
@@ -66,41 +67,72 @@ class EventController extends Controller
 	        		'sign'=>'0',
 	        		'integral'=>'5',
 	        		'openid'=>$xml_arr['FromUserName'],
-	        		'continuity'=>1
+	        		'continuity'=>1,
+	        		'time'=>time()
 	        	];
 	        	DB::table('sign')->insert($data);
         	}
+        	//查询数据库
+        	$sign =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->first();
         	//判断是签到还是未签到
         	if ($sign->sign=="1") {
         		$message ="已签到";
         	}else{
         		$message ="签到成功";
         		DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['sign'=>1]);
-        		//判断当前天数
-        		if ($sign->continuity=="1") {
+        		//判断时间
+        		$sign_time =date('Y-m-d',$sign->time);
+        		$time =date('Y-m-d',time());
+        		//判断昨天时间和今日时间
+        		if ($sign_time!=$time) {
+        			//连续签到
+	        		//第1天
+	        		if ($sign->continuity=="1") {
+	        			$integral =$sign->integral+10;
+	        			$continuity =$sign->continuity+1;
+	        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+	        				'integral'=>$integral,'continuity'=>$continuity,'time'=>time()
+	        			]);
+	        		}
+	        		//第2天
+	        		if ($sign->continuity=="2") {
+	        			$integral =$sign->integral+15;
+	        			$continuity =$sign->continuity+1;
+	        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+	        				'integral'=>$integral,'continuity'=>$continuity,'time'=>time()
+	        			]);
+	        		}
+	        		//第3天
+	        		if ($sign->continuity=="3") {
+	        			$integral =$sign->integral+20;
+	        			$continuity =$sign->continuity+1;
+	        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+	        				'integral'=>$integral,'continuity'=>$continuity,'time'=>time()
+	        			]);
+	        		}
+	        		//第4天
+	        		if ($sign->continuity=="4") {
+	        			$integral =$sign->integral+25;
+	        			$continuity =$sign->continuity+1;
+	        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+	        				'integral'=>$integral,'continuity'=>$continuity,'time'=>time()
+	        			]);
+	        		}
+	        		//第5天
+	        		if ($sign->continuity=="5") {
+	        			$integral =$sign->integral+5;
+	        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+	        				'integral'=>$integral,'continuity'=>1,'time'=>time()
+	        			]);
+	        		}
+        		}else{
+        			//未连续签到
         			$integral =$sign->integral+5;
-        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
+        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update([
+        				'integral'=>$integral,'continuity'=>1,'time'=>time()
+        			]);
         		}
-        		//第二天
-        		if ($sign->continuity=="2") {
-        			$integral =$sign->integral+10;
-        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
-        		}
-        		//第三天
-        		if ($sign->continuity=="3") {
-        			$integral =$sign->integral+15;
-        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
-        		}
-        		//第四天
-        		if ($sign->continuity=="4") {
-        			$integral =$sign->integral+20;
-        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
-        		}
-        		//第五天
-        		if ($sign->continuity=="5") {
-        			$integral =$sign->integral+25;
-        			DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['integral'=>$integral]);
-        		}
+        		
         	}
         	
         }
