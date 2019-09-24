@@ -55,12 +55,12 @@ class EventController extends Controller
 
         }
         //签到
-        if ($xml_arr['EventKey']=="1") {
+        if ($xml_arr['EventKey']=="签到") {
         	//判断是否有这个用户签到
         	$res =DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->count();
         	if (empty($res)) {
         		$data =[
-	        		'sign'=>'1',
+	        		'sign'=>'0',
 	        		'integral'=>'5',
 	        		'openid'=>$xml_arr['FromUserName'],
 	        		'continuity'=>1
@@ -75,6 +75,7 @@ class EventController extends Controller
         		$message ="已签到";
         	}else{
         		$message ="签到成功";
+        		DB::table('sign')->where(['openid'=>$xml_arr['FromUserName']])->update(['sign'=>1]);
         	}
         	
         }
