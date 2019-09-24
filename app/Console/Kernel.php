@@ -44,17 +44,17 @@ class Kernel extends ConsoleKernel
                     'touser'=>$value->openid,
                     'template_id'=>$template_id,
                     'data'=>[
-                        'first'=>['value'=>''],
+                        'first'=>['value'=>'积分签到'],
                         'keyword1'=>['value'=>$nickname],
                         'keyword2'=>['value'=>$value->integral]
                     ]
                 ];
-                // $res =$tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+                $res =$tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
             }
-
+             DB::table('sign')->update(['sign']=>0);
             \Log::info('任务调动');
-        // })->dailyAt('20:00');;
-        })->cron('* * * * *');
+        })->dailyAt('20:00');;
+        // })->cron('* * * * *');
     }
 
     /**
