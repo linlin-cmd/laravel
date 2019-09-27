@@ -36,7 +36,6 @@ class Kernel extends ConsoleKernel
                 //获取用户昵称
                 $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$tools->access_token()."&openid=".$value->openid."&lang=zh_CN");
                 $kao_openid =json_decode($kao_openid,1);
-                dd($kao_openid);
                 $nickname =$kao_openid['nickname'];
                 //模板id
                 $template_id ="qiwDKDaZd3Wg9Lnl3bPKH5vxlqQ-wbOlp5wQ3qLfCcg";
@@ -52,7 +51,7 @@ class Kernel extends ConsoleKernel
                 ];
                 $res =$tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
             }
-             DB::table('sign')->update(['sign'=>0]);
+            $res =DB::table('sign')->update(['sign'=>0]);
             \Log::info('任务调动');
         // })->dailyAt('20:00');
         })->cron('* * * * *');
