@@ -15,6 +15,7 @@
 				<select name="type" id="">
 					<option value="1">click</option>			
 					<option value="2">view</option>			
+					<option value="3">pic_weixin</option>			
 				</select><br>
 			事件值<input type="text" name="key_url"><br>
 			<input type="submit" value="提交">
