@@ -92,6 +92,21 @@ class EventController extends Controller
         		]);
         	$message = 'hello,'.$kao_openid['nickname'];
         }
+        //判断图片
+        if ($xml_arr['MsgType']=="event" && $xml_arr['Event'] =="pic_weixin") {
+        	$user_openid = $xml_arr['FromUserName']; //粉丝openid
+        	//获取用户信息
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =json_decode($kao_openid,1);
+		    DB::table('wx_msg')->insert([
+        			'form_user_name'=>$kao_openid['nickname'],
+        			'openid'=>$xml_arr['FromUserName'],
+        			'status'=>$xml_arr['Event'],
+        			'content'=>$xml_arr['EventKey'],
+        			'time'=>$xml_arr['CreateTime']
+        		]);
+		    $message ="1";
+        }
         //回复消息
         $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
 		echo $xml_str;

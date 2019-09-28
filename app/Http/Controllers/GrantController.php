@@ -150,6 +150,12 @@ class GrantController extends Controller
                             'name'=>$v['name'],
                             'url'=>$v['key_url']
                         ];
+                    }else{
+                        $arr =[
+                            'type'=>'pic_weixin',
+                            'name'=>$v['name'],
+                            'key'=>$v['key_url']
+                        ];
                     }
                 }elseif($v['button_type'] == 2){ //带有二级菜单的一级菜单
                     $arr['name'] = $v['name'];
@@ -164,6 +170,12 @@ class GrantController extends Controller
                             'type'=>'view',
                             'name'=>$v['name2'],
                             'url'=>$v['key_url']
+                        ];
+                    }else{
+                        $arr =[
+                            'type'=>'pic_weixin',
+                            'name'=>$v['name'],
+                            'key'=>$v['key_url']
                         ];
                     }
                     $arr['sub_button'][] = $button_arr;
