@@ -86,8 +86,8 @@ class EventController extends Controller
 		    DB::table('wx_msg')->insert([
         			'form_user_name'=>$kao_openid['nickname'],
         			'openid'=>$xml_arr['FromUserName'],
-        			'status'=>$xml_arr['MsgType'],
-        			'content'=>$xml_arr['Content'],
+        			'status'=>$xml_arr['Event'],
+        			'content'=>$xml_arr['EventKey'],
         			'time'=>$xml_arr['CreateTime']
         		]);
         	$message = 'hello,'.$kao_openid['nickname'];
