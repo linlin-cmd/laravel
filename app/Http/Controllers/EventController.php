@@ -30,25 +30,25 @@ class EventController extends Controller
         /**
          * 业务逻辑
          */
-       //  if($xml_arr['MsgType'] == 'event'){
-       //      if($xml_arr['Event'] == 'subscribe'){
-       //      	//二维码
-       //          $share_code = explode('_',$xml_arr['EventKey'])[1];
-       //          $user_openid = $xml_arr['FromUserName']; //粉丝openid
-       //          //判断openid是否已经在日志表
-       //          $wechat_openid =DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
-       //          if(empty($wechat_openid)){
-       //              DB::table('qrcode')->where(['id'=>$share_code])->increment('share_num',1);
-       //              DB::table('wechat_log')->insert([
-       //                  'openid'=>$user_openid,
-       //                  'add_time'=>time()
-       //              ]);
-       //          }
-			    // ///新关注用户发送信息
-			    // $message = '欢迎关注!,';
-       //      }
+        if($xml_arr['MsgType'] == 'event'){
+            if($xml_arr['Event'] == 'subscribe'){
+            	//二维码
+                $share_code = explode('_',$xml_arr['EventKey'])[1];
+                $user_openid = $xml_arr['FromUserName']; //粉丝openid
+                //判断openid是否已经在日志表
+                $wechat_openid =DB::table('wechat_log')->where(['openid'=>$user_openid])->first();
+                if(empty($wechat_openid)){
+                    DB::table('qrcode')->where(['id'=>$share_code])->increment('share_num',1);
+                    DB::table('wechat_log')->insert([
+                        'openid'=>$user_openid,
+                        'add_time'=>time()
+                    ]);
+                }
+			    ///新关注用户发送信息
+			    $message = '欢迎关注!,';
+            }
 
-       //  }
+        }
         //用户回复消息
       //   if($xml_arr['Event'] == 'subscribe' && $xml_arr['MsgType'] == 'event') {
       //   	$user_openid = $xml_arr['FromUserName']; //粉丝openid
@@ -74,9 +74,24 @@ class EventController extends Controller
         			'content'=>$xml_arr['Content'],
         			'time'=>$xml_arr['CreateTime']
         		]);
+        	$message = "时间".date('Y-m-d H:i:s',$xml_arr['CreateTime'])."内容:".$xml_arr['Content'];
+        }
+        //判断click
+        if ($xml_arr['MsgType']=="event" && $xml_arr['Event'] =="CLICK") {
+        	
+        	$user_openid = $xml_arr['FromUserName']; //粉丝openid
+        	//获取用户信息
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =json_decode($kao_openid,1);
+		    DB::table('wx_msg')->insert([
+        			'form_user_name'=>$kao_openid['nickname'],
+        			'openid'=>$xml_arr['FromUserName'],
+        			'status'=>$xml_arr['MsgType'],
+        			'content'=>$xml_arr['Content'],
+        			'time'=>$xml_arr['CreateTime']
+        		]);
         	$message = 'hello,'.$kao_openid['nickname'];
         }
-
         //回复消息
         $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
 		echo $xml_str;
