@@ -50,14 +50,14 @@ class EventController extends Controller
 
        //  }
         //用户回复消息
-        if($xml_arr['Event'] == 'subscribe' && $xml_arr['MsgType'] == 'event') {
-        	$user_openid = $xml_arr['FromUserName']; //粉丝openid
-        	//获取用户信息
-		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
-		    $kao_openid =json_decode($kao_openid,1);
-		    ///新关注用户发送信息
-		    $message = 'hello,'.$kao_openid['nickname'];
-        }
+      //   if($xml_arr['Event'] == 'subscribe' && $xml_arr['MsgType'] == 'event') {
+      //   	$user_openid = $xml_arr['FromUserName']; //粉丝openid
+      //   	//获取用户信息
+		    // $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    // $kao_openid =json_decode($kao_openid,1);
+		    // ///新关注用户发送信息
+		    // $message = 'hello,'.$kao_openid['nickname'];
+      //   }
 
         //判断用户发送的内容
         //文本内容
