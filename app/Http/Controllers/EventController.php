@@ -58,14 +58,13 @@ class EventController extends Controller
 		    // ///新关注用户发送信息
 		    // $message = 'hello,'.$kao_openid['nickname'];
       //   }
-
         //判断用户发送的内容
         //文本内容
         if ($xml_arr['MsgType']=="text") {
         	
         	$user_openid = $xml_arr['FromUserName']; //粉丝openid
         	//获取用户信息
-		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=25_V74tuL2qQPTJKmAYa6NX3VCdyGJN2NkC_D68YhcsTQF8FQip41YX0rSuOGWxGFtg2eDo0SRJ67uod6J4O6l-Kq8xF5vtCLcGiIQPb0gcF7jsWExnVEVxeej61C5RNvrnt50WCLNtWWBn2I1JBRJbAGAJZR&openid=".$user_openid."&lang=zh_CN");
 		    $kao_openid =json_decode($kao_openid,1);
 		    DB::table('wx_msg')->insert([
         			'form_user_name'=>$kao_openid['nickname'],
@@ -81,7 +80,7 @@ class EventController extends Controller
         	
         	$user_openid = $xml_arr['FromUserName']; //粉丝openid
         	//获取用户信息
-		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=25_V74tuL2qQPTJKmAYa6NX3VCdyGJN2NkC_D68YhcsTQF8FQip41YX0rSuOGWxGFtg2eDo0SRJ67uod6J4O6l-Kq8xF5vtCLcGiIQPb0gcF7jsWExnVEVxeej61C5RNvrnt50WCLNtWWBn2I1JBRJbAGAJZR&openid=".$user_openid."&lang=zh_CN");
 		    $kao_openid =json_decode($kao_openid,1);
 		    DB::table('wx_msg')->insert([
         			'form_user_name'=>$kao_openid['nickname'],
@@ -96,7 +95,7 @@ class EventController extends Controller
         if ($xml_arr['MsgType']=="event" && $xml_arr['Event'] =="pic_weixin") {
         	$user_openid = $xml_arr['FromUserName']; //粉丝openid
         	//获取用户信息
-		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->access_token()."&openid=".$user_openid."&lang=zh_CN");
+		    $kao_openid =file_get_contents("https://api.weixin.qq.com/cgi-bin/user/info?access_token=25_V74tuL2qQPTJKmAYa6NX3VCdyGJN2NkC_D68YhcsTQF8FQip41YX0rSuOGWxGFtg2eDo0SRJ67uod6J4O6l-Kq8xF5vtCLcGiIQPb0gcF7jsWExnVEVxeej61C5RNvrnt50WCLNtWWBn2I1JBRJbAGAJZR&openid=".$user_openid."&lang=zh_CN");
 		    $kao_openid =json_decode($kao_openid,1);
 		    DB::table('wx_msg')->insert([
         			'form_user_name'=>$kao_openid['nickname'],
