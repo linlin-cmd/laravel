@@ -49,7 +49,7 @@ class Kernel extends ConsoleKernel
                         'keyword2'=>['value'=>$value->integral]
                     ]
                 ];
-                $res =$tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+                // $res =$tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
             }
             $res =DB::table('sign')->update(['sign'=>0]);
             \Log::info('任务调动');

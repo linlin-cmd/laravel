@@ -362,3 +362,15 @@ Route::prefix('crontab')->group(function () {
 	Route::get('news/{v}','CrontabController@news');
 });
 
+//hadmin
+Route::prefix('hadmin')->group(function () {
+	//后台展示页面
+	Route::get('index','hadmin\AdminController@index');
+	//后台主页
+	Route::get('index_v1','hadmin\AdminController@index_v1');
+});
+//hadmin登录
+Route::get('hadmin/login','hadmin\LoginController@login');
+Route::post('hadmin/login_do','hadmin\LoginController@login_do');
+//发送微信验证码
+Route::get('hadmin/send','hadmin\LoginController@send');
