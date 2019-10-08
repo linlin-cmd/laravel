@@ -13,7 +13,6 @@ class LoginController extends Controller
 		$this->tools =$tools;
 	}
     public function login(){
-    	// dd(session('hadmin_code'));
     	return view('hadmin.login.login');
     }
     public function login_do(){
@@ -63,15 +62,18 @@ class LoginController extends Controller
     //绑定账号
     public function account(){
         //反调回路径
-        $res =request()->all();
+        $code =request()->all();
         //如果为空去回调
-        if (empty($res)) {
+        if (empty($code)) {
             $redirect_url=env('APP_URL').'/hadmin/account';
             $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             header('Location:'.$url);
         }else{
+            //获取access_token
+            $res =file_get_contents('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxaf15615068649b19&secret=5af8270de69be6b59591223b74ccb8cd&code='.$code['code'].'&grant_type=authorization_code');
+            $res =json_decode($res,1);
             //获取openid
-            $openid =file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$this->tools->access_token()."&openid=OPENID&lang=zh_CN");
+            $openid =file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$res['access_token']."&openid=".$res['openid']."&lang=zh_CN");
             $openid =json_decode($openid,1);
             dump($openid);
             return view('hadmin.login.account');
