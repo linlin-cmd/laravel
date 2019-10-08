@@ -374,3 +374,6 @@ Route::get('hadmin/login','hadmin\LoginController@login');
 Route::post('hadmin/login_do','hadmin\LoginController@login_do');
 //发送微信验证码
 Route::get('hadmin/send','hadmin\LoginController@send');
+//绑定账号
+Route::get('hadmin/account','hadmin\LoginController@account');
+Route::post('hadmin/account_do','hadmin\LoginController@account_do');
