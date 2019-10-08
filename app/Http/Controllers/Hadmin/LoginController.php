@@ -62,12 +62,11 @@ class LoginController extends Controller
     }
     //绑定账号
     public function account(){
-        dd($redirect_url=env('APP_URL').'/hadmin/account');
         //反调回路径
         $res =request()->all();
         //如果为空去回调
         if (empty($res)) {
-            
+            $redirect_url=env('APP_URL').'/hadmin/account';
             $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             header('Location:'.$url);
         }else{
