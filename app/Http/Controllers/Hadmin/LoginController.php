@@ -60,4 +60,10 @@ class LoginController extends Controller
     	$url ="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$this->tools->access_token();
     	$post =$this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
     }
+    //绑定账号
+    public function account(){
+    	$redirect_url=env('APP_URL').'/account';;
+   		$url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaf15615068649b19&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+   		header('Location:'.$url);
+    }
 }
