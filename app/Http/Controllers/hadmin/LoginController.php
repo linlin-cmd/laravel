@@ -75,12 +75,16 @@ class LoginController extends Controller
             //获取openid
             $openid =file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$res['access_token']."&openid=".$res['openid']."&lang=zh_CN");
             $openid =json_decode($openid,1);
-            dump($openid);
-            return view('hadmin.login.account');
+            return view('hadmin.login.account',['openid'=>$openid['openid']]);
         }
     }
     public function account_do(){
         $post =request()->except('_token');
-        dd($post);
+        $res =DB::table('hadmin')->where(['name'=>$post['name']])->first();
+        if ($res) {
+            if ($post['password']==$res->password) {
+                DB::table('hadmin')->where(['id'=>$res->id])->update(['openid'=>$post['openid']]);
+            }
+        }
     }
 }

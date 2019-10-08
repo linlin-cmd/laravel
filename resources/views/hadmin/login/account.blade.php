@@ -38,6 +38,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="用户名" required="" name="name">
                 </div>
+                <input type="hidden" name="openid" value="{{$openid}}">
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="密码" required="" name="password">
                 </div>
