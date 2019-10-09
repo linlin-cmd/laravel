@@ -63,12 +63,12 @@ class LoginController extends Controller
     public function account(){
         //反调回路径
         $code =request()->all();
+        $host = $_SERVER['HTTP_HOST'];  //域名
+        $uri = $_SERVER['REQUEST_URI']; //路由参数
         //如果为空去回调
         if (empty($code)) {
-            $host = $_SERVER['HTTP_HOST'];  //域名
-            $uri = $_SERVER['REQUEST_URI']; //路由参数
-            $redirect_uri ="http://".$host.$uri;  // ?code=xx
-            $code="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            $redirect_url =urlencode("http://".$host.$uri);  // ?code=xx
+            $code="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".$redirect_url."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             header('Location:'.$code);
         }else{
             //获取access_token
