@@ -87,7 +87,17 @@ class LoginController extends Controller
         if ($res) {
             if ($post['password']==$res->password) {
                 DB::table('hadmin')->where(['id'=>$res->id])->update(['openid'=>$post['openid']]);
+                return redirect('hadmin/index');
             }
         }
+    }
+    //扫码登录
+    public function code(){
+        $id =rand(1000,9999);
+        $url ="http://www.wenroulin.cn/hadmin/code_do?id=".$id;
+        return view('hadmin.login.code',['url'=>$url,'id'=>$id]);
+    }
+    public function code_do(){
+
     }
 }

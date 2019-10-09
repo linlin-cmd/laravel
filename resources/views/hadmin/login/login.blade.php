@@ -46,13 +46,12 @@
                     <input type="button" value="发送验证码" class="code">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <button type="button" class="btn btn-primary block full-width m-b" id="code">扫 码 登 录</button>
                 <div class="form-group">
-                    <img src="{{env('UPLOAD_URL')}}/wechat.jpg" width="100"height="100" display="inline">
+                    <img src="{{env('UPLOAD_URL')}}/wechat.jpg" width="100"height="100" class="img">
                 </div>
-
                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
                 </p>
-
             </form>
         </div>
     </div>
@@ -81,6 +80,8 @@
             success:function(res){
             }
         })
-
+    })
+    $('#code').on('click',function(){
+        window.location.href="http://w3.shop.com/hadmin/code";
     })
 </script>

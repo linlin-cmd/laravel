@@ -377,3 +377,6 @@ Route::get('hadmin/send','hadmin\LoginController@send');
 //绑定账号
 Route::get('hadmin/account','hadmin\LoginController@account');
 Route::post('hadmin/account_do','hadmin\LoginController@account_do');
+//扫码登录
+Route::get('hadmin/code','hadmin\LoginController@code');
+Route::get('hadmin/code_do','hadmin\LoginController@code_do');
