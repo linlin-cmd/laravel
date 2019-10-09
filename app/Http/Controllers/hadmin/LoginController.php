@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Tools\Tools;
+use Illuminate\Support\Facades\Cache;
 class LoginController extends Controller
 {
 	public $tools;
@@ -62,7 +63,7 @@ class LoginController extends Controller
     //绑定账号
     public function account(){
         //反调回路径
-        $code =request()->all();
+        $code =request()->code;
         $host = $_SERVER['HTTP_HOST'];  //域名
         $uri = $_SERVER['REQUEST_URI']; //路由参数
         //如果为空去回调
@@ -72,7 +73,7 @@ class LoginController extends Controller
             header('Location:'.$code);
         }else{
             //获取access_token
-            $res =file_get_contents('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxaf15615068649b19&secret=5af8270de69be6b59591223b74ccb8cd&code='.$code['code'].'&grant_type=authorization_code');
+            $res =file_get_contents('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxaf15615068649b19&secret=5af8270de69be6b59591223b74ccb8cd&code='.$code.'&grant_type=authorization_code');
             $res =json_decode($res,1);
             //获取openid
             $openid =file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$res['access_token']."&openid=".$res['openid']."&lang=zh_CN");
@@ -98,6 +99,22 @@ class LoginController extends Controller
         return view('hadmin.login.code',['url'=>$url,'id'=>$id]);
     }
     public function code_do(){
-
+        //唯一凭证
+        $id =request()->id;
+        //获取openid
+        $openid =$this->account();
+        $openid =json_decode($openid,1);
+        Cache::put('wecahtlogin_'.$id,$openid['openid'],10);
+        return '扫码登录成功,请稍后';
+    }
+    public function check_wecaht_login(){
+        $id =request()->id;
+        //从缓存中拿出来
+        $openid =Cache::get('wecahtlogin_'.$id);
+        if (!$openid) {
+            return json_encode(['ret'=>0,'msg'=>'用户未扫码']);
+        }else{
+            return json_encode(['ret'=>1,'msg'=>'用户已扫码']);
+        }
     }
 }

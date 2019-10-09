@@ -31,13 +31,31 @@
         <img src="http://qr.liantu.com/api.php?text={{$url}}"/>
     </div>
 
-    <!-- 全局js -->
-    <script src="{{asset('hadmin/js/jquery.min.js?v=2.1.4')}}"></script>
-    <script src="{{asset('hadmin/js/bootstrap.min.js?v=3.3.6')}}"></script>
-
     
     
 
 </body>
 
 </html>
+<script src="laravel/jq.js"></script>
+<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer>
+    //每隔几秒
+    var t =setInterval("check();",2000);
+    //setTimeout
+    var id ={{$id}};
+    funciton check(){
+        //js轮循
+        $.ajax({
+            url:"{{url('hadmin/check_wecaht_login')}}",
+            dataType:"json",
+            data:{id:id},
+            success:function(res){
+                if (res.ret==1) {
+                    clearInterval(t);
+                    alert(res.msg);
+                    location.href="{{url('hadmin/index')}}";
+                }
+            }
+        })
+    }
+</script>
