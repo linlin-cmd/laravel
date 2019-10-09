@@ -65,9 +65,11 @@ class LoginController extends Controller
         $code =request()->all();
         //如果为空去回调
         if (empty($code)) {
-            $redirect_url=env('APP_URL').'/hadmin/account';
-            $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-            header('Location:'.$url);
+            $host = $_SERVER['HTTP_HOST'];  //域名
+            $uri = $_SERVER['REQUEST_URI']; //路由参数
+            $redirect_uri ="http://".$host.$uri;  // ?code=xx
+            $code="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            header('Location:'.$code);
         }else{
             //获取access_token
             $res =file_get_contents('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxaf15615068649b19&secret=5af8270de69be6b59591223b74ccb8cd&code='.$code['code'].'&grant_type=authorization_code');
@@ -78,6 +80,7 @@ class LoginController extends Controller
             return view('hadmin.login.account',['openid'=>$openid['openid']]);
         }
     }
+    //执行绑定账号
     public function account_do(){
         $post =request()->except('_token');
         $res =DB::table('hadmin')->where(['name'=>$post['name']])->first();
