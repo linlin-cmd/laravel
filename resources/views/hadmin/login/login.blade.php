@@ -66,7 +66,6 @@
 </body>
 
 </html>
-<script src="laravel/jq.js"></script>
 <script type="text/javascript">
     $('.code').on('click',function(){
         //用户名
