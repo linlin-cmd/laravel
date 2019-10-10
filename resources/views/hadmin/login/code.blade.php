@@ -48,7 +48,7 @@
     function check(){
         //js轮循
         $.ajax({
-            url:"{{url('hadmin/check_wecaht_login')}}",
+            url:"{{url('hadmin/check_wechat_login')}}",
             dataType:"json",
             data:{id:id},
             success:function(res){

@@ -169,7 +169,6 @@ class Tools {
             $data = file_get_contents($url);
             $data = json_decode($data,true);
             $openid = $data['openid'];
-            dd($openid);
             //获取到openid之后  存储到session当中
             session(['wechat_openid'=>$openid]);
             return $openid;

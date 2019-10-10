@@ -381,4 +381,4 @@ Route::post('hadmin/account_do','hadmin\LoginController@account_do');
 Route::get('hadmin/code','hadmin\LoginController@code');
 Route::get('hadmin/code_do','hadmin\LoginController@code_do');
 //登录状态
-Route::get('hadmin/check_wecaht_login','hadmin\LoginController@check_wecaht_login');
+Route::get('hadmin/check_wechat_login','hadmin\LoginController@check_wechat_login');

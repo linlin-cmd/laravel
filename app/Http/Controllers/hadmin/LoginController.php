@@ -106,7 +106,7 @@ class LoginController extends Controller
         Cache::put('wechatlogin_'.$id,$openid,10);
         return '扫码登录成功,请稍后';
     }
-    public function check_wecaht_login(){
+    public function check_wechat_login(){
         $id =request()->id;
         //从缓存中拿出来
         $openid =Cache::get('wechatlogin_'.$id);
