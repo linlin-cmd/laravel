@@ -103,9 +103,7 @@ class LoginController extends Controller
         $id =request()->id;
         //获取openid
         $openid =$this->tools->getopenid();
-        dd($openid);
-
-        Cache::put('wechatlogin_'.$id,$openid->data['openid'],10);
+        Cache::put('wechatlogin_'.$id,$openid,10);
         return '扫码登录成功,请稍后';
     }
     public function check_wecaht_login(){

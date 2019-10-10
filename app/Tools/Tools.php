@@ -161,11 +161,11 @@ class Tools {
             $host = $_SERVER['HTTP_HOST'];  //域名
             $uri = $_SERVER['REQUEST_URI']; //路由参数
             $redirect_uri = urlencode("http://".$host.$uri);  // ?code=xx
-            $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_info&state=STATE#wechat_redirect";
+            $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WECHAT_APPID')."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             header("location:".$url);die;
         }else{
             //通过code换取网页授权access_token
-            $url =  "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".env('WECHAT_APPID')."&secret=".env('WECHAT_SECRET')."&code=".$code['code']."&grant_type=authorization_code";
+            $url =  "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".env('WECHAT_APPID')."&secret=".env('WECHAT_SECRET')."&code=".$code."&grant_type=authorization_code";
             $data = file_get_contents($url);
             $data = json_decode($data,true);
             $openid = $data['openid'];
