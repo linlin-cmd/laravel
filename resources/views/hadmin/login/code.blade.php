@@ -16,6 +16,9 @@
 
     <link href="{{asset('hadmin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('hadmin/css/style.css?v=4.1.0')}}" rel="stylesheet">
+    <!-- 全局js -->
+    <script src="{{asset('hadmin/js/jquery.min.js?v=2.1.4')}}"></script>
+    <script src="{{asset('hadmin/js/bootstrap.min.js?v=3.3.6')}}"></script>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -28,7 +31,7 @@
         <h1 class="logo-name">h</h1>
         <h3>欢迎使用 hAdmin</h3>
         <!-- 二维码 -->
-        <img src="http://qr.liantu.com/api.php?text={{$url}}"/>
+        <img src="http://qr.liantu.com/api.php?text={{$url}}" onclick="check()"/>
     </div>
 
     
@@ -37,13 +40,12 @@
 </body>
 
 </html>
-<script src="laravel/jq.js"></script>
-<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer>
+<script>
     //每隔几秒
     var t =setInterval("check();",2000);
     //setTimeout
     var id ={{$id}};
-    funciton check(){
+    function check(){
         //js轮循
         $.ajax({
             url:"{{url('hadmin/check_wecaht_login')}}",
