@@ -82,6 +82,6 @@
         })
     })
     $('#code').on('click',function(){
-        window.location.href="{{url(hadmin/code)}}";
+        window.location.href="{{url('hadmin/code')}}";
     })
 </script>

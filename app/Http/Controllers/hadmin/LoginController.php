@@ -104,13 +104,13 @@ class LoginController extends Controller
         //获取openid
         $openid =$this->account();
         $openid =json_decode($openid,1);
-        Cache::put('wecahtlogin_'.$id,$openid['openid'],10);
+        Cache::put('wechatlogin_'.$id,$openid['openid'],10);
         return '扫码登录成功,请稍后';
     }
     public function check_wecaht_login(){
         $id =request()->id;
         //从缓存中拿出来
-        $openid =Cache::get('wecahtlogin_'.$id);
+        $openid =Cache::get('wechatlogin_'.$id);
         if (!$openid) {
             return json_encode(['ret'=>0,'msg'=>'用户未扫码']);
         }else{
