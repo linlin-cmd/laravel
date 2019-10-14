@@ -10,39 +10,60 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//路由调用控制器和方法
-// Route::get('/ha','HaController@index', function () {
-//     // echo "123";
-// });
-//路由模拟表单
-// Route::get('/ha',function () {
-//     return '<form action="/haadd" method="post">'.csrf_field().'<input type="text" name="username"> <button>提交</button></form>';
-// });
-// //路由接收表单
-// Route::post('/haadd',function () {
-//     dd(request()->username);
-// });
-//多种路由
-// Route::get('/ha',function () {
-//     return '<form action="/haadd" method="post">'.csrf_field().'<input type="text" name="username"> <button>提交</button></form>';
-// });
-// Route::match(['get','post'], '/haadd', function () {
-//  	dd(request()->username);
-// });
-//必选参数
-// Route::get('ha/{id}', function ($id) {
-//  return '我的猫呢' . $id;
-// });
-//命名路由
-// Route::get('ha/index', function () {
-//  // 通过路由名称生成 URL
-//  return route('okk',['id'=>2]);
-// })->name('okk');
-//
-// Route::get('ha/okk', function () {
-//  // 通过路由名称生成 URL
-//  return redirect()->route('okk');
-// });
+/**
+ * api
+ */
+Route::get('api/user',function(){
+	return view('api.user.user');
+});
+Route::get('api/show',function(){
+	return view('api.user.show');
+});
+Route::get('api/upd',function(){
+	return view('api.user.upd');
+});
+Route::get('api/upload',function(){
+	return view('api.user.upload');
+});
+//文件上传
+Route::post('api/upp','api\UserController@upp');
+//添加
+Route::post('api/add','api\UserController@add');
+//展示
+Route::get('api/list','api\UserController@list');
+//删除
+Route::get('api/delete','api\UserController@delete');
+//修改
+Route::get('api/update','api\UserController@update');
+Route::get('api/update_do','api\UserController@update_do');
+
+/**
+ * 资源控制器
+ */
+Route::resource('api/test', 'api\PostController');
+
+/**
+ *  周考
+ */
+Route::resource('api/kao_goods', 'api\GoodsController');
+Route::get('api/kao_user',function(){
+    return view('api.kao.user');
+});
+Route::get('api/kao_index',function(){
+    return view('api.kao.index');
+});
+
+
+
+
+
+
+
+
+
+
+
+
 //主页面
 // Route::view('/','welcome',['name' => '林林']);
 //添加页面
