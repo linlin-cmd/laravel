@@ -7,7 +7,7 @@
     <meta name="Author" contect="http://www.webqin.net">
     <title>林林- @yield('title')</title>
     <link rel="shortcut icon" href="/laravel/index/images/favicon.ico" />
-    
+
     <!-- Bootstrap -->
     <link href="/laravel/index/css/bootstrap.min.css" rel="stylesheet">
     <link href="/laravel/index/css/style.css" rel="stylesheet">

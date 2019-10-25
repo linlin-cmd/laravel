@@ -5,9 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoods_userPost;
 use App\model\Kaoo;
+use DB;
 class KaoController extends Controller
 {
     public function index(){
+//        $linlin =DB::table('linlin')->join('kkk','linlin.class_id','=','kkk.class_id')->get();
+//        $linlin =json_encode($linlin);
+//        $linlin =json_decode($linlin,1);
+//        $class =[];
+//        foreach ($linlin as $k=>$v)
+//        {
+//
+//            $class[$v['class_name']][] =$v;
+//        }
+//        foreach ($class as $k=>$v)
+//        {
+//            $dd[$k][] =count($v);
+//        }
+//        dd($dd);
+//        dd();
     	return view('index');
     }
     public function add_do(StoreGoods_userPost $request){
@@ -59,7 +75,7 @@ class KaoController extends Controller
 		 	}else{
 		 		$post['kao_img'] =upload('kao_img');
 		 	}
-		 	
+
 		}
 		unset($post['oidimg']);
 		$res =Kaoo::where(['kao_id'=>$id])->update($post);

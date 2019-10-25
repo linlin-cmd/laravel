@@ -16,22 +16,22 @@
     <script src="{{asset('hadmin/js/bootstrap.min.js?v=3.3.6')}}"></script>
 </head>
 <body class="gray-bg">
-<center>
-    <form class="form-inline">
-        <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="天气" name="city">
+    <center>
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="天气" name="city">
+                </div>
             </div>
-        </div>
-        <button type="button" class="btn btn-primary" id="city">查询天气</button>
-    </form>
-</center>
+            <button type="button" class="btn btn-primary" id="city">查询天气</button>
+        </form>
+    </center>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <script>
     // JS 代码
     $.ajax({
-        url:"{{url('hadmin/weather')}}",
+        url:"{{url('api/weather')}}",
         dataType:"json",
         data:{city:"北京"},
         success:function(res){

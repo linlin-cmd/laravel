@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'checklogin' =>\App\Http\Middleware\CheckLogin::class,
         'ware' =>\App\Http\Middleware\Mare::class,
         'grant' =>\App\Http\Middleware\Grant::class,
+        'api_index' =>\App\Http\Middleware\Api::class,
+        'token' =>\App\Http\Middleware\Token::class,
     ];
 
     /**

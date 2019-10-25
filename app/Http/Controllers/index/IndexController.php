@@ -84,7 +84,7 @@ class IndexController extends Controller
     	//取出用户id
     	$user_id =session('index_login')->web_id;
     	//通过商品id获取商品
-    	$goods =Goods_goods::select('goods_id','goods_name','goods_price','goods_img')				  ->find($id)->toArray();
+    	$goods =Goods_goods::select('goods_id','goods_name','goods_price','goods_img')->find($id)->toArray();
     	//拼接数据
     	$arr =[
     		'user_id'=>$user_id,
@@ -211,11 +211,11 @@ class IndexController extends Controller
         //商品金额
         $total =DB::select("select sum(goods_price * goods_number) as total from car where user_id=$user_id and goods_id in ($ids)");
         // dd($total);
-        
+
     	return view('index/pay',compact('pay','address','total'));
     }
     // 提交订单
     public function success(){
-        
+
     }
 }

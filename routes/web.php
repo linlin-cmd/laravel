@@ -25,6 +25,9 @@ Route::get('api/upd',function(){
 Route::get('api/upload',function(){
 	return view('api.user.upload');
 });
+Route::get('api/ce_weather',function(){
+    return view('api.user.weather');
+});
 //文件上传
 Route::post('api/upp','api\UserController@upp');
 //添加
@@ -36,6 +39,8 @@ Route::get('api/delete','api\UserController@delete');
 //修改
 Route::get('api/update','api\UserController@update');
 Route::get('api/update_do','api\UserController@update_do');
+//天气
+Route::get('api/weather','api\UserController@weather');
 
 /**
  * 资源控制器
@@ -78,7 +83,7 @@ Route::get('student/delete/{id}','HaController@delete');
 Route::get('mail/index','MailController@index');
 
 //友情链接
-Route::prefix('kao')->middleware('auth')->group(function () {
+Route::prefix('kao')->group(function () {
 	//添加
  	Route::get('index','KaoController@index');
  	//执行添加
@@ -235,7 +240,7 @@ Route::prefix('kkk')->group(function () {
  * 9.16周考		->middleware('grant')	中间件中有二维码自定义菜单
  */
 Route::prefix('grant')->group(function () {
-	
+
 	//微信授权
 	Route::get('grant','GrantController@grant');
 	Route::get('code','GrantController@code');
@@ -383,14 +388,89 @@ Route::prefix('crontab')->group(function () {
 	Route::get('news/{v}','CrontabController@news');
 });
 
-//hadmin
+/**
+ * hadmin
+ */
 Route::prefix('hadmin')->group(function () {
 	//后台展示页面
 	Route::get('index','hadmin\AdminController@index');
 	//后台主页
 	Route::get('index_v1','hadmin\AdminController@index_v1');
+    //查询天气
+    Route::get('weather','hadmin\AdminController@weather');
+
+
+	//商品分类
+    Route::get('goods_cat','hadmin\Goods_catController@goods_cat');
+    Route::get('only','hadmin\Goods_catController@only');
+    Route::post('goods_cat_do','hadmin\Goods_catController@goods_cat_do');
+    //分类展示
+    Route::get('goods_cat_list','hadmin\Goods_catController@goods_cat_list');
+
+    //类型
+    Route::get('goods_type','hadmin\Goods_typeController@goods_type');
+    Route::post('goods_type_do','hadmin\Goods_typeController@goods_type_do');
+    Route::get('goods_type_list','hadmin\Goods_typeController@goods_type_list');
+
+
+
+    //属性
+    Route::get('goods_attribute','hadmin\Goods_attributeController@goods_attribute');
+    Route::post('goods_attribute_do','hadmin\Goods_attributeController@goods_attribute_do');
+    Route::get('goods_attribute_list','hadmin\Goods_attributeController@goods_attribute_list');
+    Route::get('search','hadmin\Goods_attributeController@search');
+
+
+    //商品
+    Route::get('goods','hadmin\GoodsController@goods');//商品添加
+    Route::post('goods_do','hadmin\GoodsController@goods_do');
+    //库存添加
+    Route::get('goods_list/{goods_id}','hadmin\GoodsController@goods_list');
+    //商品
+    Route::post('goods_stock','hadmin\GoodsController@goods_stock');
+    Route::get('goods_stock_list','hadmin\GoodsController@goods_stock_list');
+    Route::get('say','hadmin\GoodsController@say');
+    //change
+    Route::get('goods_change','hadmin\GoodsController@goods_change');
+
 });
-//hadmin登录
+
+/**
+ * hadmin前台
+ */
+Route::prefix('hadmin/api')->middleware('api_index')->group(function () {
+
+    //登录
+    Route::get('login','hadmin\index\LoginController@login');
+    //检验token
+    Route::get('token','hadmin\index\LoginController@token');
+
+    //前台首页
+    Route::get('index','hadmin\index\IndexController@index');
+    //商品详情
+    Route::get('goods_details','hadmin\index\IndexController@goods_details');
+    //商品分类
+    Route::get('goods_cat','hadmin\index\IndexController@goods_cat');
+    /**
+     * 分组
+     */
+    Route::middleware('token')->group(function () {
+        //购物车
+        Route::get('goods_cart','hadmin\index\IndexController@goods_cart');
+        //购物车展示
+        Route::get('goods_cart_list','hadmin\index\IndexController@goods_cart_list');
+    });
+
+
+});
+/**
+ * 前台登录
+ */
+
+
+/**
+ * hadmin登录
+ */
 Route::get('hadmin/login','hadmin\LoginController@login');
 Route::post('hadmin/login_do','hadmin\LoginController@login_do');
 //发送微信验证码

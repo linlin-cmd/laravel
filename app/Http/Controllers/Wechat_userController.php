@@ -13,7 +13,7 @@ class Wechat_userController extends Controller
         $this->tools = $tools;
     }
     public function user(){
-		return view('user.user');    	
+		return view('user.user');
     }
     public function user_do(){
     	$data =request()->except('_token');
@@ -81,7 +81,7 @@ class Wechat_userController extends Controller
     	return view('user.push',compact('id'));
     }
     public function push_do($id){
-    	$content =request()->content;
+    	$content =request()->contents;
     	$url="https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=".$this->tools->access_token();
     	$data =[
     		'filter'=>[
@@ -103,7 +103,7 @@ class Wechat_userController extends Controller
     		'openid'=>$v
     	];
     	$res =$this->tools->curl_post($url,json_encode($data));
-    	
+
     	dd($res);
     	echo $v;
     }

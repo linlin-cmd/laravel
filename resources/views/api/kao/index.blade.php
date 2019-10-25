@@ -104,6 +104,19 @@
     })
     $('#city').on('click',function(){
         var city =$('[name="city"]').val();
-
+        $.ajax({
+            url:url,
+            dataType:"json",
+            data:{city:city},
+            success:function(res){
+                $('.search').empty();
+                var tr =$('<tr class="search"></tr>');
+                tr.append('<td>'+res.data.result.area_1+'</td>');
+                tr.append('<td>'+res.data.result.area_2+'</td>');
+                tr.append('<td>'+res.data.result.realTime.wtNm+'</td>');
+                tr.append('<td>'+res.data.result.realTime.wtTemp+'</td>');
+                $('#list').append(tr);
+            }
+        })
     })
 </script>
