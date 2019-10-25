@@ -18,7 +18,7 @@ class IndexController extends Controller
     {
         
         $sign =request()->sign;
-        $rand =rand(1000,9999);
+        $rand =reques()->rand;
         if (empty($sign)){
             return json_encode(['ret'=>201,'msg'=>'签名没传'],JSON_UNESCAPED_UNICODE);
         }
