@@ -2,47 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cfbabd7-f99a-4cda-b481-cdd53d0074bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/GoodsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/Goods_attributeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/Goods_catController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/Goods_typeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/LoginController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/Api.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/Token.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_attribute.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_cart.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_cat.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_goods.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_goods_attribute.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_login.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_stock.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/hadmin/Hadmin_type.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/api/user/weather.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods/goods.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods/goods_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_attribute/goods_attribute.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_attribute/goods_attribute_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_cat/goods_cat.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_cat/goods_cat_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_stock/goods_stock.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_type/goods_type.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/goods_type/goods_type_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Wechat_userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Wechat_userController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/api/GoodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/api/GoodsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hadmin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/index/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/index/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/api/kao/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/api/kao/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/hadmin/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/hadmin/admin/index_v1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hadmin/admin/index_v1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/hadmin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/hadmin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/shop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/shop.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +198,7 @@
       <workItem from="1571703253396" duration="17913000" />
       <workItem from="1571788978844" duration="21800000" />
       <workItem from="1571876170352" duration="26188000" />
-      <workItem from="1571961800139" duration="15060000" />
+      <workItem from="1571961800139" duration="15459000" />
     </task>
     <servers />
   </component>

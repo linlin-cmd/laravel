@@ -16,13 +16,15 @@ class IndexController extends Controller
     //前台展示
     public function index()
     {
+        
         $sign =request()->sign;
+        $rand =rand(1000,9999);
         if (empty($sign)){
-            return json_encode(['ret'=>201,'msg'=>'签名没传']);
+            return json_encode(['ret'=>201,'msg'=>'签名没传'],JSON_UNESCAPED_UNICODE);
         }
-        $mysign =md5("1902".rand(1000,9999));
+        $mysign =md5("1902".$rand);
         if ($sign !=$mysign){
-            return json_encode(['ret'=>201,'msg'=>'签名不对！！']);
+            return json_encode(['ret'=>201,'msg'=>'签名不对！！'],JSON_UNESCAPED_UNICODE);
         }
         $goods =Hadmin_goods::orderBy('goods_id','desc')->paginate(4);
         //处理拼接图片路径使用函数获取
