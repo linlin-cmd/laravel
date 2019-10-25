@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4cfbabd7-f99a-4cda-b481-cdd53d0074bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -198,7 +197,7 @@
       <workItem from="1571703253396" duration="17913000" />
       <workItem from="1571788978844" duration="21800000" />
       <workItem from="1571876170352" duration="26188000" />
-      <workItem from="1571961800139" duration="15670000" />
+      <workItem from="1571961800139" duration="15780000" />
     </task>
     <servers />
   </component>
