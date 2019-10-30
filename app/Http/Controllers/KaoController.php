@@ -225,8 +225,8 @@ class KaoController extends Controller
     public function wechat_token(){
         $app_id =request()->app_id;
         $appsecret =request()->appsecret;
-        $app_url ="http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-        dump($_SERVER['SERVER_NAME']);
+        $app_url ="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        dump($app_url);
         if (empty($app_id)){
             return json_encode(['ret'=>201,'msg'=>'请传递app_id'],JSON_UNESCAPED_UNICODE);
         }
@@ -247,6 +247,7 @@ class KaoController extends Controller
 
     }
     public function ce_wechat(){
+        dd($_SERVER['SERVER_NAME']);
         $app_id =123123;
         $appsecret =456456;
         $url ="http://www.wenroulin.cn/kao/wechat_token?app_id=".$app_id."&appsecret=".$appsecret;
