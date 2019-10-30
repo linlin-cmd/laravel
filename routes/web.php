@@ -86,6 +86,14 @@ Route::get('mail/index','MailController@index');
 Route::prefix('kao')->group(function () {
 	//添加
  	Route::get('index','KaoController@index');
+    Route::get('new','KaoController@new');
+
+
+    Route::get('wechat','KaoController@wechat');
+    Route::get('wechat_list','KaoController@wechat_list');
+    Route::post('wechat_list_do','KaoController@wechat_list_do');
+    Route::get('wechat_token','KaoController@wechat_token');
+
  	//执行添加
  	Route::post('add_do','KaoController@add_do',function(){
 

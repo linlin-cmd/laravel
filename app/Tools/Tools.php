@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Tools;
 class Tools {
     public $redis;
@@ -6,7 +6,7 @@ class Tools {
     {
         $this->redis = new \Redis();
         $this->redis->connect('127.0.0.1','6379');
-        
+
     }
     //获取access_token
 	public function access_token(){
@@ -95,6 +95,24 @@ class Tools {
         curl_close($curl);
         return $data;
     }
+
+    /**
+     * curl
+     */
+
+    public function curl_get($url){
+        if (function_exists('curl_init')) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
+            $dxycontent = curl_exec($ch);
+            return $dxycontent;
+        } else {
+            return '汗！貌似您的服务器尚未开启curl扩展，无法收到来自云落的通知，请联系您的主机商开启，本地调试请无视';
+        }
+    }
     /**
      * curl
      */
@@ -138,7 +156,7 @@ class Tools {
             $this->redis->set($jssdk,$res['ticket'],$res['expires_in']);
             return $res['ticket'];
         }
-        
+
     }
 
     /**
@@ -146,9 +164,9 @@ class Tools {
     * @return [type] [description]
     */
     public function getopenid()
-    {   
+    {
         // echo 1;die;
-        //先去session里取openid 
+        //先去session里取openid
         $openid = session('wechat_openid');
         //var_dump($openid);die;
         if(!empty($openid)){
@@ -173,7 +191,11 @@ class Tools {
             session(['wechat_openid'=>$openid]);
             return $openid;
             //如果是非静默授权 再通过openid  access_token获取用户信息
-        }   
+        }
     }
+
+
+
+
 }
  ?>

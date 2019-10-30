@@ -16,16 +16,25 @@ class IndexController extends Controller
     //前台展示
     public function index()
     {
-        
+//        $url ="http://wym.yingge.fun/api/user/test";
+//        $name ="翟兆麒";
+//        $age ="18";
+//        $mobile ="15035431038";
+//        $rand =rand(1000,9999);
+//        $mysign =sha1("1902"."age={$age}"."&mobile={$mobile}"."&name={$name}"."&rand={$rand}");
+//        $url .="?name={$name}&age={$age}&mobile={$mobile}&rand={$rand}&sign={$mysign}";
+//        $res =file_get_contents($url);
+//        dd($res);
+//        dd();
         $sign =request()->sign;
         $rand =request()->rand;
-        if (empty($sign)){
-            return json_encode(['ret'=>201,'msg'=>'签名没传'],JSON_UNESCAPED_UNICODE);
-        }
+//        if (empty($sign)){
+//            return json_encode(['ret'=>201,'msg'=>'签名没传'],JSON_UNESCAPED_UNICODE);
+//        }
         $mysign =md5("1902".$rand);
-        if ($sign !=$mysign){
-            return json_encode(['ret'=>201,'msg'=>'签名不对！！'],JSON_UNESCAPED_UNICODE);
-        }
+//        if ($sign !=$mysign){
+//            return json_encode(['ret'=>201,'msg'=>'签名不对！！'],JSON_UNESCAPED_UNICODE);
+//        }
         $goods =Hadmin_goods::orderBy('goods_id','desc')->paginate(4);
         //处理拼接图片路径使用函数获取
         foreach ($goods as $k=>$v)
@@ -153,7 +162,7 @@ class IndexController extends Controller
                 $goods_price +=$vv['attribute_price'];
             }
             //组装
-            $goods_cart_list[$k]['goods_attribute_id']=implode(',',$arr);
+            $goods_cart_list[$k]['goods_attribute_name']=implode(',',$arr);
             $goods_cart_list[$k]['goods_price'] =$goods_price;
         }
         return json_encode(['ret'=>1,'data'=>$goods_cart_list]);

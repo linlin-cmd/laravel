@@ -1,4 +1,4 @@
-<?php 
+<?php
 	//封装文件上传
     function upload($filename){
         if (request()->file($filename)->isValid()) {
@@ -74,4 +74,34 @@
         // echo "\r\n取出showapi_res_code的值:\r\n";
         // print_r($result->showapi_res_code);
         // echo "\r\n";
+
+
+
+
+
+
+
+        /**
+     * aes非对称加密
+     */
+    //加密
+//    function Aes_encrypt($string, $key)
+//    {
+//        $data = openssl_encrypt($string, 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+//        return base64_encode($data);
+//    }
+//    //解密
+//    function Aes_decrypt($string, $key)
+//    {
+//        return openssl_decrypt(base64_decode($string), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+//    }
+//    /**
+//     * 获取秘钥
+//     * @return string
+//     */
+//    function Aes_getSecretKey()
+//    {
+//       $str='php从入门到放弃';//生成16位的字符窜
+//        return $str;
+//    }
  ?>
