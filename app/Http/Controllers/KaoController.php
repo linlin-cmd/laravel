@@ -236,7 +236,7 @@ class KaoController extends Controller
         $kao_wechat =DB::table('kao_wechat')->where(['app_id'=>$app_id,'appsecret'=>$appsecret])->first();
         $token =md5("1902".rand(1000,9999));
         if ($kao_wechat){
-            if ($kao_wechat->app_url!=$app_url){
+            if ($app_url != $kao_wechat->app_url){
                 return json_encode(['ret'=>201,'msg'=>'访问地址与您绑定地址不符!'],JSON_UNESCAPED_UNICODE);
             }else{
                 Cache::put('kao_token',$token,7200);
