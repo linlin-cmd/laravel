@@ -224,10 +224,9 @@ class KaoController extends Controller
     }
     public function wechat_token(){
         $app_id =request()->app_id;
-        dd($app_id);
         $appsecret =request()->appsecret;
         $app_url ="http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-        dd($app_url);
+        dump($app_url);
         if (empty($app_id)){
             return json_encode(['ret'=>201,'msg'=>'请传递app_id'],JSON_UNESCAPED_UNICODE);
         }
@@ -245,9 +244,6 @@ class KaoController extends Controller
                 return json_encode(['ret'=>1,'msg'=>$kao_token]);
             }
         }
-
-        //判断
-        dd($app_url);
 
     }
     public function ce_wechat(){
