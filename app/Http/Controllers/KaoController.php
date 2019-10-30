@@ -226,7 +226,7 @@ class KaoController extends Controller
         $app_id =request()->app_id;
         $appsecret =request()->appsecret;
         $app_url ="http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-        dump($app_url);
+        dump($_SERVER['SERVER_NAME']);
         if (empty($app_id)){
             return json_encode(['ret'=>201,'msg'=>'请传递app_id'],JSON_UNESCAPED_UNICODE);
         }
