@@ -4,7 +4,6 @@
     <list default="true" id="4cfbabd7-f99a-4cda-b481-cdd53d0074bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +203,7 @@
       <workItem from="1572070614245" duration="2644000" />
       <workItem from="1572221530734" duration="11659000" />
       <workItem from="1572307838401" duration="16586000" />
-      <workItem from="1572399209074" duration="12474000" />
+      <workItem from="1572399209074" duration="12587000" />
     </task>
     <servers />
   </component>
