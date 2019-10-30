@@ -224,6 +224,7 @@ class KaoController extends Controller
     }
     public function wechat_token(){
         $app_id =request()->app_id;
+        dd($app_id);
         $appsecret =request()->appsecret;
         $app_url ="http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
         dd($app_url);
