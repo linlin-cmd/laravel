@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cfbabd7-f99a-4cda-b481-cdd53d0074bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/aes-7.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Tools/Aes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Tools/rsa.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/kao_new.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/cert_private.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/cert_public.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/kao_wechat.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/kao_wechat_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KaoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hadmin/index/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Tools/Tools.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Tools/Tools.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -216,7 +204,7 @@
       <workItem from="1572070614245" duration="2644000" />
       <workItem from="1572221530734" duration="11659000" />
       <workItem from="1572307838401" duration="16586000" />
-      <workItem from="1572399209074" duration="11286000" />
+      <workItem from="1572399209074" duration="12474000" />
     </task>
     <servers />
   </component>

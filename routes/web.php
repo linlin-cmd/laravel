@@ -94,6 +94,9 @@ Route::prefix('kao')->group(function () {
     Route::post('wechat_list_do','KaoController@wechat_list_do');
     Route::get('wechat_token','KaoController@wechat_token');
 
+
+    Route::get('ce_wechat','KaoController@ce_wechat');
+
  	//执行添加
  	Route::post('add_do','KaoController@add_do',function(){
 
