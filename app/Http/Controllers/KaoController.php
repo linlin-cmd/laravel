@@ -233,9 +233,6 @@ class KaoController extends Controller
             return json_encode(['ret'=>201,'msg'=>'请传递appsecret'],JSON_UNESCAPED_UNICODE);
         }
         $kao_wechat =DB::table('kao_wechat')->where(['app_id'=>$app_id,'appsecret'=>$appsecret])->first();
-
-        $token =md5("1902".rand(1000,9999));
-        $time =time()+7200;
         if ($kao_wechat)
         {
 //            if ($app_url != $kao_wechat->app_url)
@@ -245,8 +242,10 @@ class KaoController extends Controller
 //
 //            }
 
+            $token =md5("1902".rand(1000,9999));
+            $time =time()+7200;
             $kao_wechat =DB::table('kao_wechat')->where(['app_id'=>$app_id,'appsecret'=>$appsecret])->update(['token'=>$token,'time'=>$time]);
-            return json_encode(['ret'=>1,'msg'=>$kao_wechat['token'],'time'=>7200]);
+            return json_encode(['ret'=>1,'msg'=>$token,'time'=>7200]);
         }
 
     }
